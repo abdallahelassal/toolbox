@@ -8,4 +8,5 @@ import "github.com/abdallahelassal/toolbox/cmd"
 
 func main() {
 	cmd.Execute()
+	// cmd.Execute()
 }
