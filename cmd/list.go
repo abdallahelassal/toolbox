@@ -13,15 +13,22 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "list all tasks",
+	Long: `Display all tasks with their stauts`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		tasks := loadTasks()
+		if len(tasks) == 0 {
+			fmt.Println("No Tasks found")
+		}
+		for i , v := range tasks {
+
+			status := "Pending"
+			if v.Done {
+				status = "Done"
+			}
+			fmt.Printf("%v. %v [%v] \n", i+1, v.Description , status)
+		}
+		
 	},
 }
 

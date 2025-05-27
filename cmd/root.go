@@ -42,8 +42,8 @@ func init() {
 	// when this action is called directly.
 	rootCmd.AddCommand(addCmd)
 	// rootCmd.AddCommand(delete.cmd)
-	// rootCmd.AddCommand(done.cmd)
-	// rootCmd.AddCommand(list.cmd)
+	 rootCmd.AddCommand(doneCmd)
+	 rootCmd.AddCommand(listCmd)
 	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
