@@ -24,6 +24,7 @@ var doneCmd = &cobra.Command{
 		tasks := loadTasks()
 		if index > len(tasks) {
 			fmt.Println("Tasks number of range ")
+			return
 		}
 		tasks[index-1].Done = true
 		saveTasks(tasks)

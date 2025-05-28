@@ -1,27 +1,35 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "delete [Task Number]",
+	Short: "delet a task",
+	Long: `Delete a task by specifying its task number.`,
+	Args: cobra.ExactArgs(1), 
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delete called")
+		index , err := strconv.Atoi(args[0])
+		if err != nil || index < 1 {
+			fmt.Println("invalid task number")
+			return
+		}
+		tasks := loadTasks()
+		if index > len(tasks) {
+			fmt.Println("Task number out of range.")
+			return
+		}
+		tasks = append(tasks[:index-1],tasks[index:]... )
+		saveTasks(tasks)
+		fmt.Printf("Task %d deleted.\n", index)
 	},
 }
 
